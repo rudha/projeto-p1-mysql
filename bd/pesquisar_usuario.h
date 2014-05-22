@@ -20,7 +20,7 @@ int pesquisar_usuario (void)
 		gets(user_name);
 		getchar();
 		
-		sprintf(query, "SELECT * FROM Contas_de_usuario WHERE Nome_de_usuario=%s", user_name);
+		sprintf(query, "SELECT Login, Nome_completo, Nivel_de_permissoes FROM Contas_de_usuario WHERE Nome_completo=%s", user_name);
 		
 		// Consultar o BD:
 		if (mysql_query(con, query))
@@ -53,7 +53,7 @@ int pesquisar_usuario (void)
 		gets(user_login);
 		getchar();
 		
-		sprintf(query, "SELECT * FROM Contas_de_usuario WHERE Login=%s", user_login);
+		sprintf(query, "SELECT Login, Nome_completo, Nivel_de_permissoes FROM Contas_de_usuario WHERE Login=%s", user_login);
 		
 		// Consultar o BD:
 		if (mysql_query(con, query))
@@ -83,7 +83,7 @@ int pesquisar_usuario (void)
 	else if (opcao == 3)
 	{
 		// Consultar o BD:
-		if (mysql_query(con, "SELECT * FROM Contas_de_usuario"))
+		if (mysql_query(con, "SELECT Login, Nome_completo, Nivel_de_permissoes FROM Contas_de_usuario"))
 		{
 			finish_with_error(con);
 		}
