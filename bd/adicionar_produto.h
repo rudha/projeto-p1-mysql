@@ -18,12 +18,10 @@ int adicionar_produto (void)
 	{
 		printf("Nome do produto a ser adicionado: ");
 		gets(prod.nome);
-		getchar;
 		printf("\n");
 		
 		printf("Fabricante do produto: ");
 		gets(prod.fabricante);
-		getchar();
 		printf("\n");
 		
 		printf("Garantia do produto(em anos): ");
@@ -33,7 +31,6 @@ int adicionar_produto (void)
 		
 		printf("Referencia do produto: ");
 		gets(prod.referencia);
-		getchar();
 		printf("\n");
 		
 		prod.estado=1;
