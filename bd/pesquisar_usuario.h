@@ -18,7 +18,6 @@ int pesquisar_usuario (void)
 	{
 		printf("Informe o nome a ser pesquisado: ");
 		gets(user_name);
-		getchar();
 		
 		sprintf(query, "SELECT Login, Nome_completo, Nivel_de_permissoes FROM Contas_de_usuario HAVING Nome_completo=%s && Estado_do_item=1", user_name);
 		
@@ -51,7 +50,6 @@ int pesquisar_usuario (void)
 	{
 		printf ("Informe o login a ser pesquisado(maximo de 20 caracteres): ");
 		gets(user_login);
-		getchar();
 		
 		sprintf(query, "SELECT Login, Nome_completo, Nivel_de_permissoes FROM Contas_de_usuario HAVING Login=%s && Estado_do_item=1", user_login);
 		
