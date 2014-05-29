@@ -30,14 +30,14 @@ int pesquisar_usuario (void)
 		// Guardar o resultado:
 		MYSQL_RES *resultado = mysql_store_result(con);
 		
-		MYSQL_FIELD *linha;
+		MYSQL_ROW *linha;
 		
 		if (resultado == NULL) 
 		{
 			finish_with_error(con);
 		}
 		
-		int linha = mysql_fetch_field(resultado);
+		linha = mysql_fetch_row(resultado);
 		
 		// Exibir linha com o nome pesquisado:
 		printf("%s\n", linha);
@@ -62,14 +62,14 @@ int pesquisar_usuario (void)
 		// Guardar o resultado:
 		MYSQL_RES *resultado = mysql_store_result(con);
 		
-		MYSQL_FIELD *linha;
+		MYSQL_ROW *linha;
 		
 		if (resultado == NULL) 
 		{
 			finish_with_error(con);
 		}
 		
-		int linha = mysql_fetch_field(resultado);
+		int linha = mysql_fetch_row(resultado);
 		
 		// Exibir linha com o login pesquisado:
 		printf("%s\n", linha);
