@@ -186,7 +186,7 @@ void edit_lote_amount (void)
 {
     char query[2048];
     
-    sprintf (query, "UPDATE Lotes SET Quantidade = %d WHERE Id = %d", inputed_amount, inputed_id);
+    sprintf (query, "UPDATE Lotes SET Quantidade = %d WHERE ID = %d", inputed_amount, inputed_id);
     
     if (mysql_query(con, query))
     {
