@@ -1,10 +1,13 @@
 //
-//  editar_usuarios.c
+//  editar_usuarios.h
 //  
 //
 //  Created by Bruno Chroniaris on 5/20/14.
 //
 // PAREI EM "STOPPED HERE"
+
+#ifndef _editar_usuario_h
+#define _editar_usuario_h
 
 #include <stdio.h>
 #include <my_global.h>
@@ -538,3 +541,5 @@ void confirmation (void)
     }
     mysql_free_result(result);
 }
+
+#endif
