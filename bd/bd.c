@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Bruno Chroniaris. All rights reserved.
 //
 
-#define PSWD "12345"
-#define USER "root"
-#define HOST "localhost"
+#define PSWD 12345
+#define USER root
+#define HOST localhost
+#define conexao con
 
 #include <stdio.h>
 #include <string.h>
@@ -17,6 +18,14 @@
 
 
 // Structs
+struct main_user
+{
+    char Login[21];
+    char Password[21];
+    char name[101];
+    int permission;
+    int activity
+};
 
 // Global Var
 
@@ -30,11 +39,14 @@ int ger_usr_menu (void);
 int get_ger_usr_option (void);
 void finish_with_error (MYSQL *con);
 int confirm_exit (void);
-
+struct main_user user_login (void);
+struct main_user get_user_info (char Password[21], char Login[21]);
 
 // Main Function
 int main(int argc, const char * argv[])
 {
+    struct main_user Logged_user;
+    
     MYSQL *conexao = mysql_init(NULL);
     
     if (conexao == NULL)
@@ -52,6 +64,7 @@ int main(int argc, const char * argv[])
     }
     
     print_welcome_interface();
+    Logged_user = user_login();
     
     do
     {
@@ -246,4 +259,87 @@ void finish_with_error(MYSQL *con)
     fprintf(stderr, "%s\n", mysql_error(con));
     mysql_close(con);
     exit(1);
+}
+
+struct main_user user_login (void)
+{
+    struct main_user Loged_user;
+    int loop;
+    
+    do
+    {
+        loop = 0;
+        
+        system("clear");
+        printf("\n");
+        printf("Digite seu Login:\n");
+        scanf("%s", Loged_user.Login);
+        getchar();
+        
+        printf("\n");
+        printf("Digite sua Senha:\n");
+        scanf("%s", Loged_user.Password);
+        getchar();
+        
+        Loged_user = get_user_info(Loged_user.Password, Loged_user.Login);
+        
+        if (Loged_user.activity == 0 || Loged_user.permission == 666) // if there was some kind of error at the login, will direct the user to try again;
+        {
+            loop = 1;
+            printf("\n");
+            printf("LOGIN OU SENHA INCORRETOS!\n");
+            printf("\n");
+            printf("Aperte enter para tentar novamente;\n");
+            getchar();
+        }
+    }while (loop);
+    
+    return Loged_user;
+}
+
+struct main_user get_user_info (char Password[21], char Login[21])
+{
+    struct main_user user_input;
+    user_input.permission = 666;
+    user_input.activity = 0;
+    
+    char query[2048];
+    
+    sprintf (query, "SELECT * FROM Contas_de_usuarios WHERE Login = %s", Login);
+    
+    if (mysql_query(con, query))
+    {
+        finish_with_error(con);
+    }
+    
+    MYSQL_RES *result = mysql_store_result(con);
+    MYSQL_ROW user_info;
+    int num = mysql_num_rows(result);
+    
+    if (num != 0)
+    {
+        user_info = mysql_fetch_row(result);
+        
+        //user_input.id = user_info[0];
+        strcpy(user_input.Login, user_info[1]);
+        strcpy(user_input.Password, user_info[2]);
+        strcpy(user_input.name, user_info[3]);
+        user_input.permission = user_info[4];
+        user_input.activity = user_info[5];
+    }
+    mysql_free_result(result);
+    
+    // Will check if the Password Maches
+    if (strcmp(user_input.Password, Password) == 0)
+    {
+        return user_input;
+    }
+    else
+    {
+        user_input.permission = 666;
+        user_input.activity = 0;
+        
+        return user_input;
+    }
+    
 }
