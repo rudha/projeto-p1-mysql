@@ -1,3 +1,6 @@
+#ifndef _pesquisar_usuario_h
+#define _pesquisar_usuario_h
+
 char user_login[21];
 char user_name[101];
 
@@ -123,3 +126,5 @@ int pesquisar_usuario (void)
 	}
 	return 0;
 }
+
+#endif
