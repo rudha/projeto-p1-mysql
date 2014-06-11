@@ -1,3 +1,6 @@
+#ifndef _pesquisar_produto_h
+#define _pesquisar_produto_h
+
 struct produto
 {
 	int id;
@@ -147,3 +150,5 @@ int pesquisar_produto (void)
 	
 	return 0;
 }
+
+#endif
