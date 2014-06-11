@@ -1,3 +1,6 @@
+#ifndef _adicionar_usuario_h
+#define _adicionar_usuario_h
+
 // Declarar variáveis das informações do usuário:
 char user_login [21];
 char user_password [21];
@@ -73,3 +76,5 @@ void insert_permission (void)
    	scanf("%d", &permission);
    	getchar();
 }
+
+#endif
