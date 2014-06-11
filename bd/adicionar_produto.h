@@ -1,3 +1,6 @@
+#ifndef _adicionar_produto_h
+#define _adicionar_produto_h
+
 struct produto
 {
 	int id;
@@ -53,3 +56,4 @@ int adicionar_produto (void)
 		printf("\n");
 	} while(loop==1);
 }
+#endif
