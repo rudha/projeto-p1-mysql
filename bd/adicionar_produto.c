@@ -1,5 +1,7 @@
 #include "headers.h"
 
+struct produto prod;
+
 int adicionar_produto (void)
 {		
 	int loop; // Para perguntar se o usuário quer adicionar mais produtos
