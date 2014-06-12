@@ -11,8 +11,6 @@ struct produto
 	int estado;
 };
 
-struct produto prod;
-
 int adicionar_produto (void);
 
 #endif
