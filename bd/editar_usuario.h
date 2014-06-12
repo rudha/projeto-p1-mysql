@@ -22,10 +22,6 @@ struct USER
     int level;
     int activity;
 };
-
-struct USER edited_user;
-struct USER user_confirmation;
-
 // main function
 
 int editar_usuarios (void);
