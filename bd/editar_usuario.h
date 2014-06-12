@@ -9,8 +9,6 @@
 #ifndef _editar_usuario_h
 #define _editar_usuario_h
 
-// global var
-
 struct USER
 {
     int id;
