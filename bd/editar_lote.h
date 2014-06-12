@@ -17,9 +17,6 @@ struct lote
     int amount;
 };
 
-//global variables
-struct lote current_lote;
-int inputed_id, inputed_amount; // values gotten from stdin;
 //functions declarations
 int editar_lote (void);
 void print_menus (int version); // will print the user interactive interface, wich will be defined by the version, where 1 == first, 2 == second ...;
