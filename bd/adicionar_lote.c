@@ -1,5 +1,9 @@
 #include "headers.h"
 
+struct goods current_goods;
+
+struct lote current_lote;
+
 //Global Variables
 struct goods
 {
