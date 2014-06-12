@@ -31,10 +31,10 @@ struct main_user
 
 // Functions Def.
 void print_welcome_interface (void); // will print the first screen, if the conection is sucessful.
-void main_menu (void);
-int get_menu_to_select (void);
-int ger_prod_menu (void);
-int get_ger_prod_option (void);
+void main_menu (struct main_user *user);
+int get_menu_to_select (struct main_user *user);
+int ger_prod_menu (struct main_user *user);
+int get_ger_prod_option (struct main_user *user);
 int ger_usr_menu (void);
 int get_ger_usr_option (void);
 void finish_with_error (MYSQL *con);
@@ -68,7 +68,7 @@ int main(int argc, const char * argv[])
     
     do
     {
-        main_menu();
+        main_menu(&Logged_user);
         
     } while (confirm_exit());
     
@@ -87,41 +87,77 @@ void print_welcome_interface (void)
     
     getchar();
 }
-void main_menu (void)
+void main_menu (struct main_user *user)
 {
     int menu_select = 100;
     int loop = 1;
     
-    do {
-        switch (menu_select)
-        {
-            case 100:
-                menu_select = get_menu_to_select();
-                break;
-            case 1:
-                menu_select = ger_prod_menu();
-                break;
-            case 2:
-                menu_select = ger_usr_menu();
-                break;
-            default:
-                loop = 0;
-                break;
-        }
-    } while (loop);
+    if (user->permission == 1 || user->permission == 2 || user->permission == 3)
+    {
+        do {
+                switch (menu_select)
+                {
+                    case 100:
+                        menu_select = get_menu_to_select(user);
+                        break;
+                    case 1:
+                        menu_select = ger_prod_menu(user);
+                        break;
+                    //case 2:
+                        //menu_select = ger_usr_menu();
+                        //break;
+                    default:
+                        loop = 0;
+                        break;
+                }
+            } while (loop);
+    }
+    else if (user->permission == 4)
+    {
+        do {
+            switch (menu_select)
+            {
+                case 100:
+                    menu_select = get_menu_to_select(user);
+                    break;
+                case 1:
+                    menu_select = ger_prod_menu(user);
+                    break;
+                case 2:
+                    menu_select = ger_usr_menu();
+                    break;
+                default:
+                    loop = 0;
+                    break;
+            }
+        } while (loop);
+    }
 }
 
-int get_menu_to_select (void)
+int get_menu_to_select (struct main_user *user)
 {
     int option;
     
     system("clear");
-    printf("\n");
-    printf("Qual area do programa voce deseja acessar?\n");
-    printf("\n");
-    printf("1 - Gerenciamento de produtos\n");
-    printf("2 - Gerenciamento de contas\n");
-    printf("0 - Sair\n");
+    
+    if (user->permission >= 1 && user->permission <4)
+    {
+        printf("\n");
+        printf("Qual area do programa voce deseja acessar?\n");
+        printf("\n");
+        printf("1 - Gerenciamento de produtos\n");
+        //printf("2 - Gerenciamento de contas\n");
+        printf("0 - Sair\n");
+    }
+    else if (user->permission == 4)
+    {
+        printf("\n");
+        printf("Qual area do programa voce deseja acessar?\n");
+        printf("\n");
+        printf("1 - Gerenciamento de produtos\n");
+        printf("2 - Gerenciamento de contas\n");
+        printf("0 - Sair\n");
+    }
     
     option = getchar() - '0';
     getchar();
@@ -129,42 +165,107 @@ int get_menu_to_select (void)
     return option;
 }
 
-int ger_prod_menu (void)
+int ger_prod_menu (struct main_user *user)
 {
     int menu_select = 100;
     int loop;
     
-    switch (menu_select)
+    if (user->permission == 1)
     {
-        case 100:
-            menu_select = get_ger_prod_option();
-            break;
-        case 1:
-            menu_select = adicionar_produto();
-            break;
-        case 2:
-            menu_select = editar_produto();
-            break;
-        case 3:
-            menu_select = pesquisar_produto();
-            break;
-        case 4:
-            menu_select = adicionar_lote();
-            break;
-        case 5:
-            menu_select = editar_lote();
-            break;
-        case 6:
-            menu_select = pesquisar_lote();
-            break;
-            
-        default:
-            return 100;
-            break;
+        switch (menu_select)
+        {
+            case 100:
+                menu_select = get_ger_prod_option(user);
+                break;
+            //case 1:
+                //menu_select = adicionar_produto();
+                //break;
+            //case 2:
+                //menu_select = editar_produto();
+                //break;
+            case 1:
+                menu_select = pesquisar_produto();
+                break;
+            //case 4:
+                //menu_select = adicionar_lote();
+                //break;
+            //case 5:
+                //menu_select = editar_lote();
+                //break;
+            case 2:
+                menu_select = pesquisar_lote();
+                break;
+                
+            default:
+                return 100;
+                break;
+        }
+    }
+    else if (user->permission == 2)
+    {
+        switch (menu_select)
+        {
+            case 100:
+                menu_select = get_ger_prod_option(user);
+                break;
+            //case 1:
+                //menu_select = adicionar_produto();
+                //break;
+            //case 2:
+                //menu_select = editar_produto();
+                //break;
+            case 1:
+                menu_select = pesquisar_produto();
+                break;
+            case 2:
+                menu_select = adicionar_lote();
+                break;
+            //case 5:
+                //menu_select = editar_lote();
+                //break;
+            case 3:
+                menu_select = pesquisar_lote();
+                break;
+                
+            default:
+                return 100;
+                break;
+        }
+    }
+    else if (user->permission == 3 || user->permission == 4)
+    {
+        switch (menu_select)
+        {
+            case 100:
+                menu_select = get_ger_prod_option(user);
+                break;
+            case 1:
+                menu_select = adicionar_produto();
+                break;
+            case 2:
+                menu_select = editar_produto();
+                break;
+            case 3:
+                menu_select = pesquisar_produto();
+                break;
+            case 4:
+                menu_select = adicionar_lote();
+                break;
+            case 5:
+                menu_select = editar_lote();
+                break;
+            case 6:
+                menu_select = pesquisar_lote();
+                break;
+                
+            default:
+                return 100;
+                break;
+        }
     }
 }
 
-int get_ger_prod_option (void)
+int get_ger_prod_option (struct main_user *user)
 {
     int option;
     
@@ -172,13 +273,37 @@ int get_ger_prod_option (void)
     printf("\n");
     printf("Qual das acoes a seguir voce deseja executar?\n");
     printf("\n");
-    printf("1 - Cadastrar Produto\n");
-    printf("2 - Editar Produto\n");
-    printf("3 - Pesquisar Produto\n");
-    printf("4 - Adicionar Lote\n");
-    printf("5 - Editar Lote\n");
-    printf("6 - Pesquisar Lote\n");
-    printf("0 - Voltar\n");
+    
+    if (user->permission == 1)
+    {
+        //printf("1 - Cadastrar Produto\n");
+        //printf("2 - Editar Produto\n");
+        printf("1 - Pesquisar Produto\n");
+        //printf("4 - Adicionar Lote\n");
+        //printf("5 - Editar Lote\n");
+        printf("2 - Pesquisar Lote\n");
+        printf("0 - Voltar\n");
+    }
+    else if (user->permission == 2)
+    {
+        //printf("1 - Cadastrar Produto\n");
+        //printf("2 - Editar Produto\n");
+        printf("1 - Pesquisar Produto\n");
+        printf("2 - Adicionar Lote\n");
+        //printf("5 - Editar Lote\n");
+        printf("3 - Pesquisar Lote\n");
+        printf("0 - Voltar\n");
+    }
+    else if (user->permission == 3 || user->permission == 4)
+    {
+        printf("1 - Cadastrar Produto\n");
+        printf("2 - Editar Produto\n");
+        printf("3 - Pesquisar Produto\n");
+        printf("4 - Adicionar Lote\n");
+        printf("5 - Editar Lote\n");
+        printf("6 - Pesquisar Lote\n");
+        printf("0 - Voltar\n");
+    }
     
     option = getchar()- '0';
     getchar();
