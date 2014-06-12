@@ -11,8 +11,6 @@
 
 // global var
 
-char user_login[21];
-
 struct USER
 {
     int id;
