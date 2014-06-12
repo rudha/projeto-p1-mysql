@@ -1,5 +1,10 @@
 #include "headers.h"
 
+char user_login[21];
+
+struct USER edited_user;
+struct USER user_confirmation;
+
 int editar_usuario (void)
 {
     int menu_selection = 1;
