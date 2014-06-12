@@ -1,5 +1,7 @@
 #include "headers.h"
 
+struct data data;
+
 int pesquisar_produto (void)
 {
 	// String que acionará o "mysql_query":
