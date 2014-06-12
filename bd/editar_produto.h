@@ -20,10 +20,6 @@ struct goods_info
     int activity;
 };
 
-// Global Variables
-struct goods_info current_goods; // this info will be retrieved from the mysql table it self;
-struct goods_info inputed_info; // this info will be inserted by the user, by stdin;
-
 // Functions definition
 int editar_produto (void);
 int get_goods_id (void); // will get the goods id and return wich menu to proceed;
