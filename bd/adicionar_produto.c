@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <my_global.h>
-#include <mysql.h>
-#include <string.h>
-#include "adicionar_produto.h"
+#include "headers.h"
 
 int adicionar_produto (void)
 {		
