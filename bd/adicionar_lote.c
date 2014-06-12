@@ -2,6 +2,7 @@
 #include <my_global.h>
 #include <mysql.h>
 #include <string.h>
+#include "adicionar_lote.h"
 
 //Global Variables
 struct goods
