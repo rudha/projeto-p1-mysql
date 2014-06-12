@@ -10,8 +10,6 @@ struct data
 	int ano;
 };
 
-struct data data
-
 int pesquisar_produto (void);
 
 #endif
