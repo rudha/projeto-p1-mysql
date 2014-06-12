@@ -1,5 +1,9 @@
 #include "headers.h"
 
+// Global Variables
+struct goods_info current_goods; // this info will be retrieved from the mysql table it self;
+struct goods_info inputed_info; // this info will be inserted by the user, by stdin;
+
 // Main Function
 int editar_produto (void)
 {
