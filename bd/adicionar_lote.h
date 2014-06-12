@@ -40,8 +40,6 @@ struct goods
     int activity;
 };
 
-struct goods current_goods;
-
 struct lote
 {
     int identification;
@@ -55,7 +53,5 @@ struct lote
     float buying_value;
     int activity;
 };
-
-struct lote current_lote;
 
 #endif
