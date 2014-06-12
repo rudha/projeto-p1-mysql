@@ -1,5 +1,9 @@
 #include "headers.h"
 
+//global variables
+struct lote current_lote;
+int inputed_id, inputed_amount; // values gotten from stdin;
+
 // main function
 int editar_lote (void)
 {
