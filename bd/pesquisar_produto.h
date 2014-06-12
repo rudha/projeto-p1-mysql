@@ -9,8 +9,6 @@ struct produto
 	char referencia[21];
 };
 
-struct produto prod;
-
 int pesquisar_produto (void);
 
 #endif
