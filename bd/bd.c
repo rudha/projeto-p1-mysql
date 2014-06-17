@@ -11,10 +11,7 @@
 #define HOST localhost
 #define conexao con
 
-#include <stdio.h>
-#include <string.h>
-#include <my_global.h>
-#include <mysql.h>
+#include "headers.h"
 
 
 // Structs
@@ -37,7 +34,6 @@ int ger_prod_menu (struct main_user *user);
 int get_ger_prod_option (struct main_user *user);
 int ger_usr_menu (void);
 int get_ger_usr_option (void);
-void finish_with_error (MYSQL *con);
 int confirm_exit (void);
 struct main_user user_login (void);
 struct main_user get_user_info (char Password[21], char Login[21]);
@@ -378,14 +374,6 @@ int confirm_exit (void)
         return 1;
     }
 }
-
-void finish_with_error(MYSQL *con)
-{
-    fprintf(stderr, "%s\n", mysql_error(con));
-    mysql_close(con);
-    exit(1);
-}
-
 struct main_user user_login (void)
 {
     struct main_user Loged_user;
